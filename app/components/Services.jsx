@@ -1,5 +1,8 @@
-import { assets, serviceData } from "@/assets/assets";
+'use client';
+
+import { serviceData } from "@/assets/assets";
 import React from "react";
+import Link from "next/link";
 import {
   FaCode,
   FaMobile,
@@ -11,19 +14,20 @@ import {
   FaPalette,
   FaDatabase,
   FaBrain,
+  FaArrowRight,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const getServiceIcon = (title) => {
   const iconMap = {
     "Web Development": <FaCode className="w-8 h-8 text-cyan-400" />,
-    "Mobile Development": <FaMobile className="w-8 h-8 text-purple-400" />,
+    "Mobile App Development": <FaMobile className="w-8 h-8 text-purple-400" />,
     "UI/UX Design": <FaPalette className="w-8 h-8 text-emerald-400" />,
-    "E-commerce": <FaShoppingCart className="w-8 h-8 text-cyan-300" />,
+    "E-commerce Platforms": <FaShoppingCart className="w-8 h-8 text-cyan-300" />,
     "SEO Optimization": <FaSearch className="w-8 h-8 text-purple-300" />,
-    Performance: <FaRocket className="w-8 h-8 text-emerald-300" />,
-    Backend: <FaDatabase className="w-8 h-8 text-cyan-400" />,
-    Consulting: <FaCog className="w-8 h-8 text-purple-400" />,
+    "Performance Engineering": <FaRocket className="w-8 h-8 text-emerald-300" />,
+    "Backend Integrations": <FaDatabase className="w-8 h-8 text-cyan-400" />,
+    "Technical Consulting": <FaCog className="w-8 h-8 text-purple-400" />,
     "Machine Learning": <FaBrain className="w-8 h-8 text-pink-400" />,
   };
   return iconMap[title] || <FaDesktop className="w-8 h-8 text-cyan-400" />;
@@ -48,16 +52,6 @@ const cardVariants = {
 };
 
 const Services = () => {
-  // Enhanced service data with Machine Learning addition
-  const enhancedServiceData = [
-    ...serviceData,
-    {
-      title: "Machine Learning",
-      description: "Develop intelligent ML models for data analysis, predictive analytics, computer vision, and AI-powered solutions to automate and optimize your business processes.",
-      link: "/services/machine-learning"
-    }
-  ];
-
   return (
       <section
           id="services"
@@ -122,14 +116,18 @@ const Services = () => {
               viewport={{ once: true, margin: "-100px" }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
           >
-            {enhancedServiceData.map(({ icon, title, description, link }, index) => (
+            {serviceData.map(({ title, description, link }, index) => (
                 <motion.div
-                    key={index}
+                    key={title}
                     variants={cardVariants}
                     className="group relative"
                 >
                   {/* Glass morphism card */}
-                  <div className="relative h-full p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-400/30 transition-all duration-700 hover:shadow-[0_20px_40px_rgba(6,182,212,0.15)] overflow-hidden">
+                  <Link
+                    href={link || '/#contact'}
+                    className="relative block h-full p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-400/30 transition-all duration-700 hover:shadow-[0_20px_40px_rgba(6,182,212,0.15)] overflow-hidden focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                    aria-label={`Read more about ${title}`}
+                  >
                     {/* Gradient border effect */}
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
 
@@ -150,9 +148,14 @@ const Services = () => {
                       {description}
                     </p>
 
+                    <span className="inline-flex items-center gap-2 text-cyan-300 font-semibold">
+                      Explore
+                      <FaArrowRight className="w-4 h-4" />
+                    </span>
+
                     {/* Hover effect overlay */}
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-400/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                  </div>
+                  </Link>
                 </motion.div>
             ))}
           </motion.div>

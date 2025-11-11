@@ -1,11 +1,13 @@
 import logo_dark from "./logo_dark.png";
 import carcare_img from "./carcare_img.png";
 import blue_image from "./blue_image.png";
+import profile_img from "@/public/profile-img.png";
+import user_image from "@/public/user-image.png";
 
 export const assets = {
-  user_image: "./user-image.png",
+  user_image,
   logo_dark,
-  profile_img: "./profile-img.png",
+  profile_img,
   carcare_img,
   blue_image,
 };
@@ -13,47 +15,86 @@ export const assets = {
 export const workData = [
   {
     title: "Car Care",
-    description: " Car Service Maintenance system",
-    bgImage: carcare_img, // Use asset reference here
+    description: "Spring-powered service maintenance platform for garages.",
+    bgImage: carcare_img,
     link: "https://github.com/mrbhanukab/CarCare",
-    techStack: ["Spring boots", "Java", "React", "Tailwind"],
+    live: "https://github.com/mrbhanukab/CarCare",
+    techStack: ["Spring Boot", "Java", "React", "Tailwind"],
   },
   {
     title: "MrVirul Portfolio",
-    description: "My portfolio website",
-    bgImage: blue_image, // Updated to use blue_image
+    description: "Interactive personal portfolio built with modern Next.js stack.",
+    bgImage: blue_image,
     link: "https://github.com/MrVirul/mr-virul-portfolio",
-    techStack: ["Java Script", "React", "Tailwind"],
+    live: "https://mrvirul.com",
+    techStack: ["Next.js", "React", "Tailwind"],
   },
 ];
 
 export const serviceData = [
   {
-    icon: assets.web_icon,
-    title: "Web design",
-    description: "Web development is the process of building, programming...",
-    link: "",
+    title: "Web Development",
+    slug: "web-development",
+    description:
+      "Responsive web applications with clean architecture, accessibility, and performance baked in from day one.",
+    link: "/services/web-development",
   },
   {
-    icon: assets.mobile_icon,
-    title: "Mobile app",
+    title: "Mobile App Development",
+    slug: "mobile-development",
     description:
-      "Mobile app development involves creating software for mobile devices...",
-    link: "",
+      "Cross-platform mobile experiences with consistent UI systems and offline-first thinking.",
+    link: "/services/mobile-development",
   },
   {
-    icon: assets.ui_icon,
-    title: "UI/UX design",
+    title: "UI/UX Design",
+    slug: "ui-ux-design",
     description:
-      "UI/UX design focuses on creating a seamless user experience...",
-    link: "",
+      "Human-centered design sprints, rapid prototyping, and polished component libraries that scale.",
+    link: "/services/ui-ux-design",
   },
-  // {
-  //   icon: assets.graphics_icon,
-  //   title: "Graphics design",
-  //   description: "Creative design solutions to enhance visual communication...",
-  //   link: "",
-  // },
+  {
+    title: "E-commerce Platforms",
+    slug: "ecommerce-platforms",
+    description:
+      "Secure storefronts, optimized checkout flows, and analytics integrations for growing brands.",
+    link: "/services/ecommerce-platforms",
+  },
+  {
+    title: "SEO Optimization",
+    slug: "seo-optimization",
+    description:
+      "Technical SEO audits, structured data, and content performance tracking to grow organic reach.",
+    link: "/services/seo-optimization",
+  },
+  {
+    title: "Performance Engineering",
+    slug: "performance-engineering",
+    description:
+      "Core Web Vitals tuning, asset budgets, and observability to keep experiences fast at scale.",
+    link: "/services/performance-engineering",
+  },
+  {
+    title: "Backend Integrations",
+    slug: "backend-integrations",
+    description:
+      "Robust APIs, third-party integrations, and secure data workflows tailored to business needs.",
+    link: "/services/backend-integrations",
+  },
+  {
+    title: "Technical Consulting",
+    slug: "technical-consulting",
+    description:
+      "Roadmapping, code reviews, and technical leadership to unlock teams and ship with confidence.",
+    link: "/services/technical-consulting",
+  },
+  {
+    title: "Machine Learning",
+    slug: "machine-learning",
+    description:
+      "Lightweight ML prototypes for prediction, personalization, and automation in production apps.",
+    link: "/services/machine-learning",
+  },
 ];
 
 // export const infoList = [

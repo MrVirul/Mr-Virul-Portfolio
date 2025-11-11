@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import {
     FaEnvelope,
@@ -15,6 +17,7 @@ import {
     FaExclamationCircle,
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useRouter } from 'next/navigation';
 
 const socialLinks = [
     {
@@ -65,12 +68,14 @@ const contactInfo = [
 ];
 
 const Contact = () => {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         phone: '',
         subject: '',
         message: '',
+        company: '', // honeypot field
     });
     const [result, setResult] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -120,35 +125,24 @@ const Contact = () => {
         setResult('Sending message...');
 
         try {
-            const response = await fetch('https://api.web3forms.com/submit', {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Accept: 'application/json',
                 },
-                body: JSON.stringify({
-                    access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    subject: formData.subject,
-                    message: formData.message,
-
-                    // ✅ hidden meta fields
-                    from_name: 'Portfolio Contact Form',
-                    redirect: 'https://yourwebsite.com/thank-you',
-                }),
+                body: JSON.stringify(formData),
             });
 
             const data = await response.json();
 
-            if (data.success) {
-                setResult("Message sent successfully! I'll get back to you soon.");
-                setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-                setErrors({});
-            } else {
-                setResult('Failed to send message. Please try again or contact me directly.');
+            if (!response.ok || !data.success) {
+                throw new Error(data?.message || 'Unable to send message.');
             }
+
+            setFormData({ name: '', email: '', phone: '', subject: '', message: '', company: '' });
+            setErrors({});
+            setResult('');
+            router.push('/thank-you');
         } catch (error) {
             setResult('Failed to send message. Please try again or contact me directly.');
         } finally {
@@ -230,6 +224,19 @@ const Contact = () => {
                             <h3 className="text-2xl font-semibold text-white mb-8">Send Me a Message</h3>
 
                             <form onSubmit={onSubmit}>
+                                {/* Honeypot field */}
+                                <div className="hidden" aria-hidden="true">
+                                    <label htmlFor="company" className="sr-only">Company</label>
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        name="company"
+                                        tabIndex={-1}
+                                        autoComplete="off"
+                                        value={formData.company}
+                                        onChange={handleChange}
+                                    />
+                                </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     {/* Name Field */}
                                     <div className="space-y-2">

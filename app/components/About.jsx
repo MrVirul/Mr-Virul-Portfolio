@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import Image from 'next/image';
 import { assets } from '@/assets/assets';
 import {
   HiCode,
@@ -124,11 +127,13 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
 
               {/* Image Container */}
-              <div className="relative overflow-hidden rounded-3xl bg-slate-800/50 backdrop-blur-md border border-white/10">
-                <img
+              <div className="relative overflow-hidden rounded-3xl bg-slate-800/50 backdrop-blur-md border border-white/10 min-h-[420px]">
+                <Image
                   src={assets.user_image}
                   alt="Virul Meemana"
-                  className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 
                 {/* Overlay */}

@@ -1,3 +1,5 @@
+'use client';
+
 import { assets } from "@/assets/assets";
 import React from "react";
 import Image from "next/image";
@@ -15,6 +17,7 @@ const navLinks = [
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
   const sideMenuRef = React.useRef(null);
 
   // Handle scroll effect for dynamic navbar
@@ -42,6 +45,26 @@ const Navbar = () => {
     };
   }, [menuOpen]);
 
+  // Track prefers-reduced-motion for scroll behavior
+  React.useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia === 'undefined') {
+      return undefined;
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleChange = (event) => setPrefersReducedMotion(event.matches);
+
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
+
   // Close menu on escape key
   React.useEffect(() => {
     const handleEscape = (e) => {
@@ -67,8 +90,9 @@ const Navbar = () => {
     setTimeout(() => {
       const element = document.querySelector(href);
       if (element) {
+        const behavior = prefersReducedMotion ? 'auto' : 'smooth';
         element.scrollIntoView({ 
-          behavior: 'smooth',
+          behavior,
           block: 'start'
         });
       }
