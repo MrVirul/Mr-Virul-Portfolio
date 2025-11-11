@@ -1,6 +1,7 @@
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,6 +14,11 @@ const sora = Sora({
   weight: ["400", "500", "600", "700"],
   variable: "--font-sora",
 });
+<body className="...">
+  {children}
+  <Analytics />
+  <SpeedInsights />
+</body>
 
 const siteUrl = process.env.SITE_URL || "https://mrvirul.com";
 const defaultTitle = "Virul Meemana | Full-Stack Developer";
