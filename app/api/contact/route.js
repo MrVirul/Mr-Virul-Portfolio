@@ -12,6 +12,7 @@ export async function POST(request) {
       subject = '',
       message = '',
       company = '',
+      access_key: clientAccessKey = '',
     } = body || {};
 
     if (company.trim().length > 0) {
@@ -22,7 +23,7 @@ export async function POST(request) {
       return NextResponse.json({ success: false, message: 'Missing required fields.' }, { status: 400 });
     }
 
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const accessKey = clientAccessKey || process.env.WEB3FORMS_ACCESS_KEY;
 
     if (!accessKey) {
       console.error('WEB3FORMS_ACCESS_KEY is not set.');
@@ -55,12 +56,18 @@ export async function POST(request) {
 
     if (!response.ok || !data.success) {
       console.error('Web3Forms error', data);
-      return NextResponse.json({ success: false, message: 'Unable to send message right now.' }, { status: 502 });
+      return NextResponse.json(
+        { success: false, message: data?.message || 'Unable to send message right now.' },
+        { status: 502 },
+      );
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Contact form submission failed', error);
-    return NextResponse.json({ success: false, message: 'Unable to send message right now.' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: error?.message || 'Unable to send message right now.' },
+      { status: 500 },
+    );
   }
 }

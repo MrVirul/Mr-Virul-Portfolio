@@ -14,15 +14,11 @@ const sora = Sora({
   weight: ["400", "500", "600", "700"],
   variable: "--font-sora",
 });
-<body className="...">
-  {children}
-  <Analytics />
-  <SpeedInsights />
-</body>
 
 const siteUrl = process.env.SITE_URL || "https://mrvirul.com";
 const defaultTitle = "Virul Meemana | Full-Stack Developer";
-const defaultDescription = "Virul Meemana crafts performant, accessible web experiences with Next.js, React, and modern tooling.";
+const defaultDescription =
+  "Virul Meemana crafts performant, accessible web experiences with Next.js, React, and modern tooling.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -73,6 +69,7 @@ export default function RootLayout({ children }) {
       >
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

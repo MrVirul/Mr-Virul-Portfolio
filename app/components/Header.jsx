@@ -1,7 +1,13 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from "react";
-import { HiArrowRight, HiDownload, HiCode, HiLightningBolt, HiSparkles } from "react-icons/hi";
+import {
+    HiArrowRight,
+    HiDownload,
+    HiCode,
+    HiLightningBolt,
+    HiSparkles,
+} from "react-icons/hi";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
@@ -11,29 +17,23 @@ const Header = () => {
     const prefersReducedMotion = useReducedMotion();
 
     useEffect(() => {
-        if (prefersReducedMotion) {
-            return undefined;
-        }
+        if (prefersReducedMotion) return;
 
         let frameId = null;
 
         const handleMouseMove = (event) => {
             const { clientX, clientY } = event;
-            if (frameId) {
-                cancelAnimationFrame(frameId);
-            }
+            if (frameId) cancelAnimationFrame(frameId);
+
             frameId = requestAnimationFrame(() => {
                 setMousePosition({ x: clientX, y: clientY });
             });
         };
 
         window.addEventListener("mousemove", handleMouseMove);
-
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
-            if (frameId) {
-                cancelAnimationFrame(frameId);
-            }
+            if (frameId) cancelAnimationFrame(frameId);
         };
     }, [prefersReducedMotion]);
 
@@ -46,11 +46,15 @@ const Header = () => {
         }),
     };
 
-    const animationProps = (delay = 0) => (
+    const animationProps = (delay = 0) =>
         prefersReducedMotion
             ? { initial: false, animate: false }
-            : { variants: fadeInUp, custom: delay, initial: "hidden", animate: "visible" }
-    );
+            : {
+                variants: fadeInUp,
+                custom: delay,
+                initial: "hidden",
+                animate: "visible",
+            };
 
     return (
         <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 overflow-hidden">
@@ -64,13 +68,14 @@ const Header = () => {
                     style={{
                         left: mousePosition.x - 144,
                         top: mousePosition.y - 144,
-                        background: "radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)",
+                        background:
+                            "radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)",
                     }}
                 />
             )}
 
             <div className="relative z-10 max-w-7xl w-full px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-12">
-                {/* Left Text Section */}
+                {/* LEFT TEXT SECTION */}
                 <div className="text-center lg:text-left max-w-xl">
                     <motion.span
                         {...animationProps()}
@@ -79,30 +84,36 @@ const Header = () => {
                         <HiSparkles className="w-4 h-4" /> Available for Projects
                     </motion.span>
 
+                    {/* HEADING (FIXED 2 LINES) */}
                     <motion.h1
                         {...animationProps(0.2)}
-                        className="mt-4 text-5xl md:text-7xl font-bold leading-tight"
+                        className="mt-4 text-4xl md:text-6xl font-bold leading-snug"
                     >
-            <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
-              Undergraduate
-            </span>{" "}
-                        <br />
-                        <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
-              Developer
-            </span>
+                        <span className="block bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
+                            Undergraduate
+                        </span>
+
+                        <span className="block bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
+                            Game Developer
+                        </span>
                     </motion.h1>
 
                     <motion.p
                         {...animationProps(0.4)}
                         className="mt-6 text-lg text-slate-300 leading-relaxed"
                     >
-                        Building sleek, high-performance web experiences with{" "}
-                        <span className="text-cyan-300 font-medium">clean code</span>,{" "}
-                        <span className="text-purple-300 font-medium">creative design</span>, and{" "}
-                        <span className="text-emerald-300 font-medium">modern tech</span>.
+                        Crafting immersive, high-performance gaming experiences through{" "}
+                        <span className="text-cyan-300 font-medium">creative gameplay</span>
+                        ,{" "}
+                        <span className="text-purple-300 font-medium">creative design</span>
+                        , and{" "}
+                        <span className="text-emerald-300 font-medium">
+                            cutting-edge technology
+                        </span>
+                        .
                     </motion.p>
 
-                    {/* Skills */}
+                    {/* SKILLS */}
                     <motion.div
                         {...animationProps(0.6)}
                         className="flex flex-wrap gap-3 mt-6"
@@ -122,7 +133,7 @@ const Header = () => {
                         ))}
                     </motion.div>
 
-                    {/* CTA Buttons */}
+                    {/* CTA BUTTONS */}
                     <motion.div
                         {...animationProps(0.8)}
                         className="mt-8 flex flex-col sm:flex-row gap-4"
@@ -143,7 +154,7 @@ const Header = () => {
                     </motion.div>
                 </div>
 
-                {/* Right Image Section */}
+                {/* RIGHT IMAGE */}
                 <motion.div
                     {...animationProps(1)}
                     className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-lg shadow-cyan-500/10 hover:rotate-3 transition-transform duration-500"

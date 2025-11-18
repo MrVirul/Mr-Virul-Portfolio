@@ -67,6 +67,8 @@ const contactInfo = [
     },
 ];
 
+const web3formsAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '';
+
 const Contact = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({
@@ -113,6 +115,44 @@ const Contact = () => {
         }
     };
 
+    const parseResponse = async (response) => {
+        const contentType = response.headers.get('content-type') || '';
+
+        if (contentType.includes('application/json')) {
+            return response.json();
+        }
+
+        const text = await response.text();
+        throw new Error(text || 'Unexpected response from server.');
+    };
+
+    const submitDirectlyToWeb3forms = async (payload) => {
+        const fallbackPayload = {
+            ...payload,
+            from_name: 'Portfolio Contact Form',
+            redirect:
+                (typeof window !== 'undefined' ? `${window.location.origin}/thank-you` : '') ||
+                'https://mrvirul.com/thank-you',
+        };
+
+        const directResponse = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify(fallbackPayload),
+        });
+
+        const directData = await directResponse.json();
+
+        if (!directResponse.ok || !directData?.success) {
+            throw new Error(directData?.message || 'Unable to send message right now.');
+        }
+
+        return directData;
+    };
+
     const onSubmit = async (event) => {
         event.preventDefault();
 
@@ -121,22 +161,46 @@ const Contact = () => {
             return;
         }
 
+        if (!web3formsAccessKey) {
+            setResult('Contact form is temporarily unavailable. Please try again later.');
+            return;
+        }
+
         setIsSubmitting(true);
         setResult('Sending message...');
 
         try {
+            const payload = {
+                ...formData,
+                access_key: web3formsAccessKey,
+            };
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(payload),
             });
 
-            const data = await response.json();
+            let data;
+            let shouldValidateApiResponse = true;
 
-            if (!response.ok || !data.success) {
-                throw new Error(data?.message || 'Unable to send message.');
+            try {
+                data = await parseResponse(response);
+            } catch (parseError) {
+                console.warn('Unable to parse contact API response, falling back to Web3Forms', parseError);
+                data = await submitDirectlyToWeb3forms(payload);
+                shouldValidateApiResponse = false;
+            }
+
+            if (shouldValidateApiResponse && (!response.ok || !data?.success)) {
+                if (response.status >= 500) {
+                    console.warn('Contact API failed, attempting direct Web3Forms submission');
+                    data = await submitDirectlyToWeb3forms(payload);
+                    shouldValidateApiResponse = false;
+                } else {
+                    throw new Error(data?.message || 'Unable to send message.');
+                }
             }
 
             setFormData({ name: '', email: '', phone: '', subject: '', message: '', company: '' });
@@ -144,7 +208,8 @@ const Contact = () => {
             setResult('');
             router.push('/thank-you');
         } catch (error) {
-            setResult('Failed to send message. Please try again or contact me directly.');
+            console.error('Contact form submission failed', error);
+            setResult(error.message || 'Failed to send message. Please try again or contact me directly.');
         } finally {
             setIsSubmitting(false);
         }
