@@ -49,3 +49,14 @@ const Button = ({
 };
 
 export default Button;
+
+import PropTypes from 'prop-types';
+
+Button.propTypes = {
+  variant: PropTypes.oneOf(['primary', 'outline', 'ghost']),
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  icon: PropTypes.node,
+};

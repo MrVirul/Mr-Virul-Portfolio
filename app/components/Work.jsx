@@ -270,4 +270,22 @@ const Work = () => {
     );
 };
 
+import PropTypes from 'prop-types';
+
+ProjectCard.propTypes = {
+    project: PropTypes.shape({
+        title: PropTypes.string,
+        bgImage: PropTypes.string,
+        image: PropTypes.string,
+        link: PropTypes.string,
+        github: PropTypes.string,
+        live: PropTypes.string,
+        demo: PropTypes.string,
+        rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        description: PropTypes.string,
+        techStack: PropTypes.arrayOf(PropTypes.string),
+    }).isRequired,
+    index: PropTypes.number.isRequired,
+};
+
 export default Work;
