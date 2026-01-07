@@ -12,33 +12,27 @@ const socialLinks = [
     href: 'https://github.com/MrVirul',
     icon: <FaGithub size={28} />,
     label: 'GitHub',
-    gradient: 'from-gray-600 to-gray-800'
   },
   {
     href: 'https://www.linkedin.com/in/virul-meemana-4597292a0/',
     icon: <FaLinkedin size={28} />,
     label: 'LinkedIn',
-    gradient: 'from-blue-600 to-blue-800'
   },
   {
     href: 'https://x.com/SoulOfVirul',
     icon: <FaXTwitter size={28} />,
     label: 'Twitter',
-    gradient: 'from-sky-500 to-sky-700'
   },
   {
     href: 'https://www.instagram.com/virul_on_insta/',
     icon: <FaInstagram size={28} />,
     label: 'Instagram',
-    gradient: 'from-pink-500 to-orange-500'
   },
   {
     href: 'https://www.facebook.com/virul.methdinu.meemana',
     icon: <FaFacebook size={28} />,
     label: 'Facebook',
-    gradient: 'from-blue-600 to-blue-400'
   },
- 
 ];
 
 const footerLinks = [
@@ -78,13 +72,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gradient-to-b from-background to-surface/20 text-text border-t border-white/10 overflow-hidden">
-      {/* Enhanced background effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-24 left-1/4 w-96 h-96 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-24 right-1/4 w-80 h-80 bg-gradient-to-r from-secondary/10 to-highlight/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <footer className="relative bg-primary text-secondary border-t border-secondary/20 overflow-hidden">
       <div className="relative z-10">
         <motion.div 
           className="container mx-auto py-16 px-6 lg:px-20"
@@ -100,12 +88,12 @@ const Footer = () => {
           >
             <motion.button
               onClick={scrollToTop}
-              className="group relative p-6 bg-gradient-to-r from-primary to-accent text-background font-bold rounded-full hover:shadow-neon transition-all duration-300 overflow-hidden"
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              className="group relative p-4 bg-primary border border-accent text-accent rounded-full hover:bg-accent hover:text-primary transition-all duration-300"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              aria-label="Scroll to top"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-accent to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
-              <FaArrowUp className="h-6 w-6 relative z-10 transition-transform duration-300 group-hover:-translate-y-1" />
+              <FaArrowUp className="h-6 w-6 relative z-10" />
             </motion.button>
           </motion.div>
 
@@ -121,10 +109,10 @@ const Footer = () => {
                   alt="MrVirul Logo"
                   width={240}
                   height={60}
-                  className="mx-auto md:mx-0 transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+                  className="mx-auto md:mx-0 filter grayscale hover:grayscale-0 transition-all duration-300"
                 />
               </div>
-              <p className="text-muted mb-6 max-w-sm leading-relaxed font-sora text-lg">
+              <p className="text-secondary mb-6 max-w-sm leading-relaxed font-sora text-lg">
                 Crafting exceptional digital experiences with passion, precision, and cutting-edge technology.
               </p>
               <div className="flex items-center justify-center md:justify-start gap-3 text-accent">
@@ -138,21 +126,20 @@ const Footer = () => {
               className="text-center"
               variants={itemVariants}
             >
-              <h3 className="text-xl font-bold text-white mb-6 font-inter">
+              <h3 className="text-xl font-bold text-secondary mb-6 font-inter">
                 Quick Links
               </h3>
               <ul className="space-y-3">
-                {footerLinks.map((link, index) => (
+                {footerLinks.map((link) => (
                   <motion.li 
                     key={link.href}
                     variants={itemVariants}
                   >
                     <a
                       href={link.href}
-                      className="text-muted hover:text-primary transition-colors duration-300 font-sora relative group"
+                      className="text-secondary hover:text-accent transition-colors duration-300 font-sora relative group"
                     >
                       {link.label}
-                      <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-full group-hover:left-0 transition-all duration-300"></div>
                     </a>
                   </motion.li>
                 ))}
@@ -164,20 +151,20 @@ const Footer = () => {
               className="text-center md:text-right"
               variants={itemVariants}
             >
-              <h3 className="text-xl font-bold text-white mb-6 font-inter">
+              <h3 className="text-xl font-bold text-secondary mb-6 font-inter">
                 Let's Connect
               </h3>
               <div className="space-y-4 mb-8">
-                <div className="flex items-center justify-center md:justify-end gap-3 text-muted">
+                <div className="flex items-center justify-center md:justify-end gap-3 text-secondary">
                   <span className="font-sora">Available for freelance</span>
-                  <div className="w-3 h-3 bg-secondary rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
                 </div>
-                <p className="text-muted font-sora">
+                <p className="text-secondary font-sora">
                   Ready for new opportunities
                 </p>
               </div>
 
-              {/* Enhanced Social Media Links */}
+              {/* Social Media Links */}
               <div className="flex justify-center md:justify-end gap-4">
                 {socialLinks.map((link, idx) => (
                   <motion.a
@@ -185,32 +172,30 @@ const Footer = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`relative p-4 bg-gradient-to-br ${link.gradient} rounded-2xl text-white hover:shadow-neon transition-all duration-300 overflow-hidden group`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="flex justify-center items-center w-12 h-12 rounded-full border border-secondary/30 text-secondary hover:text-primary hover:bg-accent hover:border-accent transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
+                    aria-label={link.label}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                    <div className="relative z-10">
-                      {link.icon}
-                    </div>
+                    {link.icon}
                   </motion.a>
                 ))}
               </div>
             </motion.div>
           </div>
 
-          {/* Enhanced Divider */}
+          {/* Divider */}
           <motion.div 
             className="relative mb-8"
             variants={itemVariants}
           >
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              <div className="w-full border-t border-secondary/10"></div>
             </div>
             <div className="relative flex justify-center">
-              <div className="px-6 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-white/10">
-                <div className="flex items-center gap-2 text-accent">
-                  <FaHeart className="w-4 h-4 animate-pulse" />
+              <div className="px-6 py-2 bg-primary border border-secondary/10 rounded-full">
+                <div className="flex items-center gap-2 text-secondary">
+                  <FaHeart className="w-4 h-4 text-accent" />
                   <span className="text-sm font-medium font-sora">Made with passion</span>
                   <FaCoffee className="w-4 h-4" />
                 </div>
@@ -218,28 +203,21 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Enhanced Copyright */}
+          {/* Copyright */}
           <motion.div 
             className="text-center space-y-4"
             variants={itemVariants}
           >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-muted text-sm font-sora">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-secondary text-sm font-sora">
               <p className="flex items-center gap-2">
                 &copy; {currentYear} MrVirul. All rights reserved.
               </p>
               <p className="flex items-center gap-2">
-                Designed & Built with{' '}
-                <motion.span
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-                >
-                  <FaHeart className="text-accent w-4 h-4" />
-                </motion.span>{' '}
-                by MrVirul
+                Designed & Built by MrVirul
               </p>
             </div>
             
-            <div className="text-xs text-muted/60 font-sora">
+            <div className="text-xs text-secondary/60 font-sora">
               Built with Next.js, React, Tailwind CSS & Framer Motion
             </div>
           </motion.div>
