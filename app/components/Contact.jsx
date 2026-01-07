@@ -18,37 +18,33 @@ import {
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
+import Button from './ui/Button';
 
 const socialLinks = [
     {
         href: 'https://github.com/MrVirul',
         icon: <FaGithub className="w-5 h-5" />,
         label: 'GitHub',
-        color: 'from-slate-600 to-slate-800',
     },
     {
         href: 'https://www.linkedin.com/in/virul-meemana-4597292a0/',
         icon: <FaLinkedin className="w-5 h-5" />,
         label: 'LinkedIn',
-        color: 'from-blue-600 to-blue-800',
     },
     {
         href: 'https://x.com/SoulOfVirul',
         icon: <FaXTwitter className="w-5 h-5" />,
         label: 'Twitter',
-        color: 'from-gray-700 to-black',
     },
     {
         href: 'https://www.instagram.com/virul_on_insta/',
         icon: <FaInstagram className="w-5 h-5" />,
         label: 'Instagram',
-        color: 'from-pink-500 to-orange-500',
     },
     {
         href: 'https://www.facebook.com/virul.methdinu.meemana',
         icon: <FaFacebook className="w-5 h-5" />,
         label: 'Facebook',
-        color: 'from-blue-600 to-blue-800',
     },
 ];
 
@@ -218,24 +214,18 @@ const Contact = () => {
     return (
         <section
             id="contact"
-            className="relative w-full px-4 md:px-8 lg:px-16 xl:px-24 py-16 md:py-24 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950 text-slate-100 overflow-hidden min-h-screen"
+            className="relative w-full px-4 md:px-8 lg:px-16 xl:px-24 py-16 md:py-24 bg-primary text-secondary overflow-hidden min-h-screen"
         >
-            {/* Background Effects */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-emerald-500/5 to-cyan-400/5 rounded-full blur-3xl"></div>
-            </div>
-
             <div className="relative z-10 max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h4 className="text-sm md:text-base font-medium text-cyan-400 tracking-wider mb-4 uppercase">
+                    <h4 className="text-sm md:text-base font-medium text-accent tracking-wider mb-4 uppercase">
                         Get In Touch
                     </h4>
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
                         Let's Work Together
                     </h2>
-                    <p className="text-base md:text-lg max-w-2xl mx-auto text-slate-300 leading-relaxed">
+                    <p className="text-base md:text-lg max-w-2xl mx-auto text-secondary leading-relaxed">
                         Ready to bring your vision to life? I'm available for freelance projects and full-time
                         opportunities.
                     </p>
@@ -245,18 +235,18 @@ const Contact = () => {
                     {/* Contact Info Sidebar */}
                     <div className="lg:col-span-4 space-y-6">
                         {/* Contact Information */}
-                        <div className="p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div className="p-6 md:p-8 rounded-2xl bg-primary border border-secondary/20 hover:border-accent transition-all duration-300">
                             <h3 className="text-xl font-semibold text-white mb-6">Contact Information</h3>
                             <div className="space-y-6">
                                 {contactInfo.map((info, index) => (
                                     <div key={index} className="flex items-start gap-4">
-                                        <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 text-cyan-400 flex-shrink-0">
+                                        <div className="p-3 rounded-xl bg-transparent border border-accent text-accent flex-shrink-0">
                                             {info.icon}
                                         </div>
                                         <div className="min-w-0">
                                             <h4 className="font-medium text-white text-sm">{info.title}</h4>
-                                            <p className="text-slate-300 text-sm">{info.detail}</p>
-                                            <p className="text-xs text-purple-300">{info.subtitle}</p>
+                                            <p className="text-secondary text-sm">{info.detail}</p>
+                                            <p className="text-xs text-secondary/70">{info.subtitle}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -264,7 +254,7 @@ const Contact = () => {
                         </div>
 
                         {/* Social Links */}
-                        <div className="p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div className="p-6 md:p-8 rounded-2xl bg-primary border border-secondary/20 hover:border-accent transition-all duration-300">
                             <h3 className="text-xl font-semibold text-white mb-6">Follow Me</h3>
                             <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-3 xl:grid-cols-5 gap-3">
                                 {socialLinks.map((link, idx) => (
@@ -273,7 +263,7 @@ const Contact = () => {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`group p-3 rounded-xl bg-gradient-to-br ${link.color} text-white hover:scale-105 transition-all duration-300 hover:shadow-lg flex items-center justify-center aspect-square`}
+                                        className="group p-3 rounded-xl bg-primary border border-secondary text-secondary hover:border-accent hover:text-accent hover:scale-105 transition-all duration-300 flex items-center justify-center aspect-square"
                                         title={link.label}
                                     >
                                         {link.icon}
@@ -285,7 +275,7 @@ const Contact = () => {
 
                     {/* Contact Form */}
                     <div className="lg:col-span-8">
-                        <div className="p-6 md:p-8 lg:p-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div className="p-6 md:p-8 lg:p-10 rounded-2xl bg-primary border border-secondary/20 hover:border-accent/50 transition-all duration-300">
                             <h3 className="text-2xl font-semibold text-white mb-8">Send Me a Message</h3>
 
                             <form onSubmit={onSubmit}>
@@ -305,19 +295,19 @@ const Contact = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     {/* Name Field */}
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-slate-300">Full Name *</label>
+                                        <label className="block text-sm font-medium text-secondary">Full Name *</label>
                                         <div className="relative">
-                                            <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 text-sm" />
+                                            <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-accent text-sm" />
                                             <input
                                                 type="text"
                                                 name="name"
                                                 placeholder="Enter your full name"
                                                 value={formData.name}
                                                 onChange={handleChange}
-                                                className={`w-full pl-12 pr-4 py-3 bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100 placeholder-slate-400 transition-all duration-300 ${
+                                                className={`w-full pl-12 pr-4 py-3 bg-primary border rounded-xl focus:outline-none focus:ring-1 focus:ring-accent text-white placeholder-secondary/50 transition-all duration-300 ${
                                                     errors.name
                                                         ? 'border-red-400 focus:ring-red-400'
-                                                        : 'border-white/10 hover:border-cyan-400/50'
+                                                        : 'border-secondary/20 hover:border-accent'
                                                 }`}
                                             />
                                         </div>
@@ -331,19 +321,19 @@ const Contact = () => {
 
                                     {/* Email Field */}
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-slate-300">Email Address *</label>
+                                        <label className="block text-sm font-medium text-secondary">Email Address *</label>
                                         <div className="relative">
-                                            <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 text-sm" />
+                                            <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-accent text-sm" />
                                             <input
                                                 type="email"
                                                 name="email"
                                                 placeholder="Enter your email"
                                                 value={formData.email}
                                                 onChange={handleChange}
-                                                className={`w-full pl-12 pr-4 py-3 bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100 placeholder-slate-400 transition-all duration-300 ${
+                                                className={`w-full pl-12 pr-4 py-3 bg-primary border rounded-xl focus:outline-none focus:ring-1 focus:ring-accent text-white placeholder-secondary/50 transition-all duration-300 ${
                                                     errors.email
                                                         ? 'border-red-400 focus:ring-red-400'
-                                                        : 'border-white/10 hover:border-cyan-400/50'
+                                                        : 'border-secondary/20 hover:border-accent'
                                                 }`}
                                             />
                                         </div>
@@ -357,32 +347,32 @@ const Contact = () => {
 
                                     {/* Phone Field */}
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-slate-300">Phone Number</label>
+                                        <label className="block text-sm font-medium text-secondary">Phone Number</label>
                                         <div className="relative">
-                                            <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 text-sm" />
+                                            <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-accent text-sm" />
                                             <input
                                                 type="tel"
                                                 name="phone"
                                                 placeholder="Enter your phone number"
                                                 value={formData.phone}
                                                 onChange={handleChange}
-                                                className="w-full pl-12 pr-4 py-3 bg-slate-800/50 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100 placeholder-slate-400 transition-all duration-300 hover:border-cyan-400/50"
+                                                className="w-full pl-12 pr-4 py-3 bg-primary border border-secondary/20 rounded-xl focus:outline-none focus:ring-1 focus:ring-accent text-white placeholder-secondary/50 transition-all duration-300 hover:border-accent"
                                             />
                                         </div>
                                     </div>
 
                                     {/* Subject Field */}
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-slate-300">Subject</label>
+                                        <label className="block text-sm font-medium text-secondary">Subject</label>
                                         <div className="relative">
-                                            <FaEdit className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 text-sm" />
+                                            <FaEdit className="absolute left-4 top-1/2 transform -translate-y-1/2 text-accent text-sm" />
                                             <input
                                                 type="text"
                                                 name="subject"
                                                 placeholder="What's this about?"
                                                 value={formData.subject}
                                                 onChange={handleChange}
-                                                className="w-full pl-12 pr-4 py-3 bg-slate-800/50 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100 placeholder-slate-400 transition-all duration-300 hover:border-cyan-400/50"
+                                                className="w-full pl-12 pr-4 py-3 bg-primary border border-secondary/20 rounded-xl focus:outline-none focus:ring-1 focus:ring-accent text-white placeholder-secondary/50 transition-all duration-300 hover:border-accent"
                                             />
                                         </div>
                                     </div>
@@ -390,7 +380,7 @@ const Contact = () => {
 
                                 {/* Message Field */}
                                 <div className="space-y-2 mb-8">
-                                    <label className="block text-sm font-medium text-slate-300">Message *</label>
+                                    <label className="block text-sm font-medium text-secondary">Message *</label>
                                     <textarea
                                         name="message"
                                         placeholder="Tell me about your project or how I can help you..."
@@ -398,10 +388,10 @@ const Contact = () => {
                                         value={formData.message}
                                         onChange={handleChange}
                                         maxLength="500"
-                                        className={`w-full p-4 bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100 placeholder-slate-400 transition-all duration-300 resize-none ${
+                                        className={`w-full p-4 bg-primary border rounded-xl focus:outline-none focus:ring-1 focus:ring-accent text-white placeholder-secondary/50 transition-all duration-300 resize-none ${
                                             errors.message
                                                 ? 'border-red-400 focus:ring-red-400'
-                                                : 'border-white/10 hover:border-cyan-400/50'
+                                                : 'border-secondary/20 hover:border-accent'
                                         }`}
                                     ></textarea>
                                     {errors.message && (
@@ -410,23 +400,20 @@ const Contact = () => {
                                             {errors.message}
                                         </p>
                                     )}
-                                    <p className="text-xs text-slate-400">{formData.message.length}/500 characters</p>
+                                    <p className="text-xs text-secondary/50">{formData.message.length}/500 characters</p>
                                 </div>
 
                                 {/* Submit Button */}
                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                                    <button
+                                    <Button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className={`w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 ${
-                                            isSubmitting
-                                                ? 'opacity-70 cursor-not-allowed'
-                                                : 'hover:scale-105 active:scale-95'
-                                        }`}
+                                        className="w-full sm:w-auto"
+                                        variant="primary"
                                     >
                                         {isSubmitting ? (
                                             <>
-                                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
                                                 Sending...
                                             </>
                                         ) : (
@@ -435,7 +422,7 @@ const Contact = () => {
                                                 <FaPaperPlane className="w-4 h-4" />
                                             </>
                                         )}
-                                    </button>
+                                    </Button>
 
                                     {result && (
                                         <div
@@ -443,7 +430,7 @@ const Contact = () => {
                                                 result.includes('success')
                                                     ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20'
                                                     : result.includes('Sending')
-                                                        ? 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/20'
+                                                        ? 'text-accent bg-accent/10 border border-accent/20'
                                                         : 'text-red-400 bg-red-500/10 border border-red-500/20'
                                             }`}
                                         >
@@ -454,7 +441,7 @@ const Contact = () => {
                                     )}
                                 </div>
 
-                                <p className="text-xs text-slate-400 mt-6 text-center">
+                                <p className="text-xs text-secondary/50 mt-6 text-center">
                                     * Required fields. Your information will be kept confidential.
                                 </p>
                             </form>

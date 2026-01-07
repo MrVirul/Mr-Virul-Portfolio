@@ -1,13 +1,24 @@
 @import "tailwindcss";
 
+:root {
+  --background: #0a0a0a;
+  --foreground: #c5c6c7;
+}
+
+@theme {
+  --color-primary: #0a0a0a;
+  --color-accent: #3fa9f5;
+  --color-secondary: #c5c6c7;
+}
+
 * {
   font-family: var(--font-inter), var(--font-sora), sans-serif;
   box-sizing: border-box;
 }
 
 html {
-  background: #0F172A;
-  color: #F1F5F9;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -17,7 +28,9 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -26,8 +39,8 @@ html {
 }
 
 body {
-  background: #0F172A;
-  color: #F1F5F9;
+  background: var(--background);
+  color: var(--foreground);
   min-height: 100vh;
   font-size: 1rem;
   line-height: 1.7;
@@ -36,10 +49,15 @@ body {
 
 a {
   outline: none;
-  transition: color 0.2s, background 0.2s;
+  transition: color 0.2s;
+  color: var(--color-accent);
+}
+
+a:hover {
+  filter: brightness(1.2); /* Slight lift without changing hue */
 }
 
 a:focus {
-  outline: 2px solid #06B6D4;
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
