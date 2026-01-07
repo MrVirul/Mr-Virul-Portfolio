@@ -6,6 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
 import { motion } from 'framer-motion';
+import Button from './ui/Button';
 
 const socialLinks = [
   {
@@ -165,20 +166,24 @@ const Footer = () => {
               </div>
 
               {/* Social Media Links */}
-              <div className="flex justify-center md:justify-end gap-4">
+              <div className="flex justify-center md:justify-end gap-3">
                 {socialLinks.map((link, idx) => (
-                  <motion.a
+                  <motion.div
                     key={idx}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex justify-center items-center w-12 h-12 rounded-full border border-secondary/30 text-secondary hover:text-primary hover:bg-accent hover:border-accent transition-all duration-300"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    aria-label={link.label}
                   >
-                    {link.icon}
-                  </motion.a>
+                    <Button
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="outline"
+                      aria-label={link.label}
+                      className="!p-3 !rounded-full !w-12 !h-12 aspect-square flex items-center justify-center border-secondary/30 text-secondary hover:!bg-accent hover:!text-primary hover:!border-accent"
+                    >
+                      {link.icon}
+                    </Button>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
