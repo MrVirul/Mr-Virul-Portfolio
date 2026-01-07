@@ -165,7 +165,7 @@ const Navbar = () => {
         >
           <Button
             href="#contact"
-            variant="outline"
+            variant="primary"
             onClick={(e) => handleNavClick(e, '#contact')}
             icon={<HiMail className="w-4 h-4" />}
           >

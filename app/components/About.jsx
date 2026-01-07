@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
 import Button from './ui/Button';

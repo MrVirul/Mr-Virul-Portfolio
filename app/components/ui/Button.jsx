@@ -15,9 +15,9 @@ const Button = ({
   const baseStyles = "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-accent text-primary hover:bg-secondary hover:text-primary hover:shadow-lg hover:-translate-y-0.5",
-    outline: "bg-transparent border border-accent text-accent hover:bg-accent hover:text-primary hover:shadow-lg hover:-translate-y-0.5",
-    ghost: "bg-transparent text-secondary hover:text-accent hover:bg-white/5",
+    primary: "bg-accent !text-primary hover:bg-secondary hover:!text-primary hover:shadow-lg hover:-translate-y-0.5",
+    outline: "bg-transparent border border-accent !text-accent hover:bg-accent hover:!text-primary hover:shadow-lg hover:-translate-y-0.5",
+    ghost: "bg-transparent text-secondary hover:!text-accent hover:bg-white/5",
   };
 
   const selectedVariant = variants[variant] || variants.primary;

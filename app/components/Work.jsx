@@ -259,7 +259,7 @@ const Work = () => {
                 >
                     <Button
                         href="#contact"
-                        variant="outline"
+                        variant="primary"
                         icon={<FaArrowRight className="w-4 h-4" />}
                     >
                         Want to see more projects?
